@@ -10,9 +10,11 @@ window.addEventListener("load", function () {
     const leftButton = document.getElementById("left");
     const rightButton = document.getElementById("right");
     const rocket = document.getElementById("rocket");
-    rocket.style.position = "relative";
-    rocket.style.right = "0px";
-    rocket.style.bottom = "-255px";
+    const background = document.getElementById("shuttleBackground");
+    const rect = background.getBoundingClientRect();
+    rocket.style.position = "absolute";
+    rocket.style.right = "43%";
+    rocket.style.bottom = "-3%";
 
     takeoffButton.addEventListener("click", function () {
         let ready = confirm("Confirm that the shuttle is ready for takeoff.");
@@ -33,8 +35,8 @@ window.addEventListener("load", function () {
         let backgroundPicture = document.querySelector("#shuttleBackground");
         backgroundPicture.style.backgroundColor = "green";
         document.getElementById("spaceShuttleHeight").innerHTML = 0;
-        rocket.style.right = "0px";
-        rocket.style.bottom = "-255px";
+        rocket.style.right = "43%";
+        rocket.style.bottom = "-3%";
     });
 
     abortButton.addEventListener("click", function () {
@@ -46,38 +48,37 @@ window.addEventListener("load", function () {
             backgroundPicture.style.backgroundColor = "green";
             let shuttleHeight = document.getElementById("spaceShuttleHeight");
             document.getElementById("spaceShuttleHeight").innerHTML = 0;
-            rocket.style.right = "0px";
-            rocket.style.bottom = "-255px";
+            rocket.style.right = "43%";
+            rocket.style.bottom = "-3%";
         }
     });
 
-    // There must be a way to get the x,y coords for the parent element to use in the boolean logic, otherwise
-    //on windows of different sizes, it won't work properly with hardcoded values for the movement limits
-
     upButton.addEventListener("click", function () {
         let shuttleHeight = document.getElementById("spaceShuttleHeight");
-        if (parseInt(rocket.style.bottom) <= 0) {
-        rocket.style.bottom = parseInt(rocket.style.bottom) + 10 + "px";
+        if (parseInt(rocket.style.bottom) <= 85) {
+        rocket.style.bottom = parseInt(rocket.style.bottom) + 2 + "%";
         shuttleHeight.innerHTML = Number(shuttleHeight.innerHTML) + 10000;
         }
     });
 
     downButton.addEventListener("click", function () {
         let shuttleHeight = document.getElementById("spaceShuttleHeight");
-        if (parseInt(rocket.style.bottom) >= -250) {
+        if (parseInt(rocket.style.bottom) >= 0) {
         shuttleHeight.innerHTML = Number(shuttleHeight.innerHTML) - 10000;
-        rocket.style.bottom = parseInt(rocket.style.bottom) - 10 + "px";
+        rocket.style.bottom = parseInt(rocket.style.bottom) - 2 + "%";
         }
     });
 
     rightButton.addEventListener("click", function () {
-        if (parseInt(rocket.style.right) >= -270) {
-        rocket.style.right = parseInt(rocket.style.right) - 10 + "px";
+        if (parseInt(rocket.style.right) >= -3) {
+        rocket.style.right = parseInt(rocket.style.right) -2 + "%" ;
         }
     });
 
     leftButton.addEventListener("click", function () {
-        rocket.style.right = parseInt(rocket.style.right) + 10 + "px";
+        if (parseInt(rocket.style.right) <= 90) {
+        rocket.style.right = parseInt(rocket.style.right) + 2 + "%";
+        }
     });
         
 })
